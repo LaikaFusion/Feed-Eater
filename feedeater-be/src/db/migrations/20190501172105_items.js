@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("items", function(item) {
+  return knex.schema.createTable("Items", function(item) {
     item.incriments("itemId");
     item.json("content");
     item.timestamp("created_at");
@@ -7,5 +7,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable("items");
+  return knex.schema.dropTable("Items");
 };

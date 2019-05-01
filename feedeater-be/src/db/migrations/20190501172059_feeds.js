@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("feeds", function(feed) {
+  return knex.schema.createTable("Feeds", function(feed) {
     feed.incriments("feedId");
     feed.string("url");
     feed.timestamp("lastChecked");
@@ -7,5 +7,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable("feeds");
+  return knex.schema.dropTable("Feeds");
 };
