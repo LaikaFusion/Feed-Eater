@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable("Users", function(user) {
-    user.incriments("userId");
+    user.increments("userId");
     user.string("username");
     user.string("hash");
   });

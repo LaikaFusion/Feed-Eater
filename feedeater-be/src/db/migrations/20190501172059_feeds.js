@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable("Feeds", function(feed) {
-    feed.incriments("feedId");
+    feed.increments("feedId");
     feed.string("url");
     feed.timestamp("lastChecked");
   });

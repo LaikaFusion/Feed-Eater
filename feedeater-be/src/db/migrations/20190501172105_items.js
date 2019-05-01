@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable("Items", function(item) {
-    item.incriments("itemId");
+    item.increments("itemId");
     item.json("content");
     item.timestamp("created_at");
   });
