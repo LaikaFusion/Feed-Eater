@@ -1,0 +1,15 @@
+{
+  "name": "Feed-Eater",
+  "version": "1.0.0",
+  "description": "An RSS feed reader",
+  "main": "index.js",
+  "repository": "git@github.com:LaikaFusion/Feed-Eater.git",
+  "author": "LaikaFusion <newrad4@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
