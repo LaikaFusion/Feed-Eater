@@ -1,16 +1,25 @@
-const { GraphQLServer } = require('graphql-yoga')
+const { ApolloServer, gql } = require('apollo-server');
 
-const typeDefs = `
+// The GraphQL schema
+const typeDefs = gql`
   type Query {
-    hello(name: String): String!
+    "A simple type for getting started!"
+    hello: String
   }
-`
+`;
 
+// A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: (_, { name }) => `Hello ${name || 'World'}`,
+    hello: () => 'world',
   },
-}
+};
 
-const server = new GraphQLServer({ typeDefs, resolvers })
-server.start(() => console.log('Server is running on localhost:4000'))
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});

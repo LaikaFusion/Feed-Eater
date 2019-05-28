@@ -7,9 +7,11 @@
   "author": "LaikaFusion <newrad4@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.17.4",
+    "apollo-server": "^2.5.0",
+    "graphql": "^14.3.1",
     "knex": "^0.16.5",
-    "mongoose": "^5.5.11"
+    "mongoose": "^5.5.11",
+    "rss-parser": "^3.7.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
