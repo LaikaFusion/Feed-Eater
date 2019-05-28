@@ -7,12 +7,14 @@
   "author": "LaikaFusion <newrad4@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.17.4"
+    "graphql-yoga": "^1.17.4",
+    "knex": "^0.16.5",
+    "mongoose": "^5.5.11"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
-  "scripts":{
+  "scripts": {
     "start": "nodemon index.js"
   }
 }
