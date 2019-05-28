@@ -4,7 +4,7 @@
   "description": "An RSS feed reader",
   "main": "index.js",
   "repository": "git@github.com:LaikaFusion/Feed-Eater.git",
-  "author": "LaikaFusion <newrad4@gmail.com>",
+  "author": "LaikaFusion",
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.5.0",
@@ -15,7 +15,8 @@
     "rss-parser": "^3.7.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "sqlite3": "^4.0.8"
   },
   "scripts": {
     "start": "nodemon index.js"
