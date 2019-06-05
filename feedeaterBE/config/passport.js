@@ -15,7 +15,7 @@ module.exports = function(passport){passport.use(
     try {
       // req.body.password = bcrypt.hashSync(req.body.password, 14);
 
-      results = await dbhelpers.findUser(username);
+      results = await dbHelpers.findUser(username);
       bcrypt
         .compare(password, results.hash)
         .then(function(res) {
