@@ -3,11 +3,11 @@ const knexConfig = require("../knexfile.js");
 const db = knex(knexConfig.development);
 
 module.exports = {
-  addUser: (body) => {
-    return db("users").insert({ ...body });
+  addUser: (user,hashpw) => {
+    return db("users").insert({username:user,hash:hashpw });
   },
   findUser:  (user) => {
-    return db("Users")
+    return db("users")
     .where({username: user})
   }
 };

@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 const { ApolloServer, gql } = require("apollo-server-express");
 const cors = require('cors');
 
@@ -11,6 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
+
+
+const saltRounds = 10;
 
 
 
@@ -58,6 +62,28 @@ app.post("/login",function(req, res,cb) {
   })(req,res,cb); 
   
 });
+
+app.post("/adduser", async function(req, res) {
+  if (!req.body.username || !req.body.password) {
+    res.status(400).json({ errorMessage: "Invalid body" });
+  }
+  
+ 
+  // console.log(userCheck)
+
+  bcrypt.hash(req.body.password, saltRounds, async function  (err, hash) {
+    console.log(err);
+    try{
+      const results = await dbhelpers.addUser(req.body.username,hash);
+      res.send(results)
+    }catch(err){
+      res.json({"error":err})
+    }
+    
+  });
+
+
+})
 
 app.use("/", function(req, res) {
   console.log(req)
