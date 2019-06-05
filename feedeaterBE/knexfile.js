@@ -4,15 +4,16 @@ module.exports = {
   development: {
     client: "sqlite3",
     connection: {
-      filename: "./dev.sqlite3"
+      filename: "./db/dev.sqlite3"
     },
     seeds: {
-      directory: "./seeds"
+      directory: "./db/seeds"
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./migrations"
-    }
+      directory: "./db/migrations"
+    },
+    useNullAsDefault: true
   },
 
   production: {
