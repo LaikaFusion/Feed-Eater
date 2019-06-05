@@ -40,4 +40,20 @@ const resolvers = {
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
-module.exports = new ApolloServer({ typeDefs, resolvers });
+module.exports = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+  context: async ({ req }) => {
+    try {
+      // const token = getToken(req.headers.authorization);
+      // const { payload } = jwt.verify(token, JWT_SECRET);
+
+    console.log( req.headers.authorization);
+      // return { user };
+    } catch (err) {
+      console.log(err);
+      return {};
+    }
+  }
+});
