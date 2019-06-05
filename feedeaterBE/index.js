@@ -1,16 +1,9 @@
 const express = require("express");
 const passport = require("passport");
-const Strategy = require("passport-local").Strategy;
-const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const { ApolloServer, gql } = require("apollo-server-express");
 const cors = require("cors");
 const auth = require("./routes/auth");
 require('./config/passport.js')(passport);
-
-const dbhelpers = require("./db/dbhelpers");
 
 const app = express();
 app.use(cors());
