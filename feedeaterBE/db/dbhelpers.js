@@ -8,6 +8,6 @@ module.exports = {
   },
   findUser:  (user) => {
     return db("users")
-    .where({username: user})
+    .where({username: user}).first()
   }
 };

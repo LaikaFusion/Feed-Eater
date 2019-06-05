@@ -27,12 +27,22 @@ passport.use(new Strategy(
     // req.body.password = bcrypt.hashSync(req.body.password, 14);
     
     results = await dbhelpers.findUser(username);
-    success = true;
-    console.log(results)
+    bcrypt.compare(password, results.hash).then(function(res) {
+      console.log(res)
+      success = res;
+      return cb(null, {user: results.username, id:results.id},success);
+    }).catch(function(err){
+      console.log(err)
+      return cb(null, results ,success);
+
+    });
   } catch (err) {
     console.log('Find user error')
+    return cb(null, results ,success);
   }
-    return cb(null, {user: results},success);
+
+  
+   
 
   // return UserModel.findOne({email, password})
   //    .then(user => {
