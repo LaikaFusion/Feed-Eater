@@ -1,9 +1,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable("usersitems", function(ui) {
-    ui.integer("userId");
-    ui.foreign("userId").references("Users.userId");
-    ui.integer("itemId");
-    ui.foreign("itemId").references("Items.itemId");
+    ui.integer("userid");
+    ui.foreign("userid").references("Users.userid");
+    ui.integer("itemid");
+    ui.foreign("itemid").references("Items.itemid");
   });
 };
 

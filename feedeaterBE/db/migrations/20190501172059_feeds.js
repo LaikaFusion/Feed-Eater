@@ -1,8 +1,8 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("Feeds", function(feed) {
-    feed.increments("feedId");
+  return knex.schema.createTable("feeds", function(feed) {
+    feed.increments("feedid");
     feed.string("url");
-    feed.timestamp("lastChecked");
+    feed.timestamp("lastchecked");
   });
 };
 
