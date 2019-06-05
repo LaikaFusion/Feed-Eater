@@ -1,6 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const { ApolloServer, gql } = require("apollo-server-express");
@@ -56,6 +58,23 @@ passport.use(new Strategy(
 ));
 
 
+passport.use(new JwtStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey   : 'ILovePokemon'
+},
+function (jwtPayload, cb) {
+
+  //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+  return User.findById(jwtPayload.id)
+      .then(user => {
+          return cb(null, user);
+      })
+      .catch(err => {
+          return cb(err);
+      });
+}
+));
+
 
 
 app.post("/login",function(req, res,cb) {
@@ -67,7 +86,9 @@ app.post("/login",function(req, res,cb) {
      res.json({"error":"failed"})
      return
    }
-   res.json({...user})
+   const tokenGen = jwt.sign({ id: user.id, email: user.username}, 'ILovePokemon');
+
+   res.json({...user,token:tokenGen})
    
   })(req,res,cb); 
   
@@ -78,9 +99,6 @@ app.post("/adduser", async function(req, res) {
     res.status(400).json({ errorMessage: "Invalid body" });
   }
   
- 
-  // console.log(userCheck)
-
   bcrypt.hash(req.body.password, saltRounds, async function  (err, hash) {
     console.log(err);
     try{
