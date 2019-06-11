@@ -43,23 +43,22 @@ module.exports = function(passport){passport.use(
   })
 );
 
-passport.use(
-  new JwtStrategy(
-    {
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "ILovePokemon"
-    },
-    function(jwtPayload, cb) {
-      //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-      return User.findById(jwtPayload.id)
-        .then(user => {
-          return cb(null, user);
-        })
-        .catch(err => {
-          return cb(err);
-        });
-    }
-  )
-);
+// passport.use(
+//   new JwtStrategy(
+//     {
+//       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//       secretOrKey: "ILovePokemon"
+//     },
+//     function(jwtPayload, cb) {
+//       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+//       return User.findById(jwtPayload.id)
+//         .then(user => {
+//           return cb(null, user);
+//         })
+//         .catch(err => {
+//           return cb(err);
+//         });
+//     }
+//   )
+// );
 }
-

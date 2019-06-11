@@ -1,18 +1,17 @@
 const { ApolloServer, gql } = require("apollo-server-express");
-
+const passport = require("passport");
 
 const jwt = require("jsonwebtoken");
 
-
 const books = [
   {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
+    title: "Harry Potter and the Chamber of Secrets",
+    author: "J.K. Rowling"
   },
   {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
+    title: "Jurassic Park",
+    author: "Michael Crichton"
+  }
 ];
 
 // Type definitions define the "shape" of your data and specify
@@ -37,8 +36,8 @@ const typeDefs = gql`
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => books,
-  },
+    books: () => books
+  }
 };
 
 // In the most basic sense, the ApolloServer can be started
@@ -50,14 +49,23 @@ module.exports = new ApolloServer({
   playground: true,
   context: async ({ req }) => {
     try {
-      const token = req.headers.authorization;
-      const results = jwt.verify(token, "ILovePokemon");
+      // get the user token from the headers
+      const token = req.headers.authorization || "";
+console.log(token)
+      // try to retrieve a user with the token
+      const user = getUser(token);
+
+      // optionally block the user
+      // we could also check user roles/permissions here
+      if (!user) throw new AuthorizationError("you must be logged in");
+
+      // add the user to the context
+      return { user };
+
       
-    console.log( results);
       // return { user };
     } catch (err) {
-      throw new Error('401: User is not authenticated');
-
+      throw new Error("401: User is not authenticated");
     }
   }
 });
