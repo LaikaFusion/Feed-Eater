@@ -51,16 +51,19 @@ module.exports = new ApolloServer({
     try {
       // get the user token from the headers
       const token = req.headers.authorization || "";
-console.log(token)
-      // try to retrieve a user with the token
-      const user = getUser(token);
 
+      if(token===""){
+        throw new Error("No auth in header")
+      }
+      const decoded = jwt.verify(token, 'ILovePokemon');
+      // try to retrieve a user with the token
+      const id = decoded.id
       // optionally block the user
       // we could also check user roles/permissions here
-      if (!user) throw new AuthorizationError("you must be logged in");
+    
 
       // add the user to the context
-      return { user };
+      return { id };
 
       
       // return { user };
