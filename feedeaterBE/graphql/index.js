@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server-express");
 const passport = require("passport");
-
+const dbHelpers = require("../db/dbhelpers");
 const jwt = require("jsonwebtoken");
 
 const books = [
@@ -45,7 +45,7 @@ const resolvers = {
     id: (obj, args, context, info) => {return context.id}
   },
   Mutation:{
-    addServer: (obj, args, context, info)=>{console.log( args);}
+    addServer: async (obj, args, context, info)=>{return await dbHelpers.addRssFeed( args.URL);}
   }
 };
 
