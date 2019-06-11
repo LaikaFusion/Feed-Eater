@@ -16,12 +16,13 @@ module.exports = function(passport){passport.use(
      
 
       results = await dbHelpers.findUser(username);
+      console.log(results)
       bcrypt
         .compare(password, results.hash)
         .then(function(res) {
           console.log(res);
           success = res;
-          return cb(null, { user: results.username, id: results.id }, success);
+          return cb(null, { user: results.username, id: results.userid }, success);
         })
         .catch(function(err) {
           console.log(err);

@@ -15,6 +15,7 @@ router.post("/login",function(req, res, cb) {
       res.json({ error: "failed" });
       return;
     }
+    console.log(user)
     const tokenGen = jwt.sign(
       { id: user.id, email: user.username },
       "ILovePokemon"
