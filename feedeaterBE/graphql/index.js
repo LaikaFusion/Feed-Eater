@@ -1,5 +1,9 @@
 const { ApolloServer, gql } = require("apollo-server-express");
 
+
+const jwt = require("jsonwebtoken");
+
+
 const books = [
   {
     title: 'Harry Potter and the Chamber of Secrets',
@@ -46,14 +50,14 @@ module.exports = new ApolloServer({
   playground: true,
   context: async ({ req }) => {
     try {
-      // const token = getToken(req.headers.authorization);
-      // const { payload } = jwt.verify(token, JWT_SECRET);
-
-    console.log( req.headers.authorization);
+      const token = req.headers.authorization;
+      const results = jwt.verify(token, "ILovePokemon");
+      
+    console.log( results);
       // return { user };
     } catch (err) {
-      console.log(err);
-      return {};
+      throw new Error('401: User is not authenticated');
+
     }
   }
 });
